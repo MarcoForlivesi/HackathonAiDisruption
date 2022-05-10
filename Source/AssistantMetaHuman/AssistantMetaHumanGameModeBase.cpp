@@ -135,7 +135,15 @@ void AAssistantMetaHumanGameModeBase::OnMessageResponse(FHttpRequestPtr Request,
 
 	bool Success = FJsonObjectConverter::JsonObjectStringToUStruct(ResponseBody, &HumanResponse, 0, 0);
 
-	//OnResponseComplete();
+	/*TSharedPtr<FJsonObject> JsonObject = MakeShareable(new FJsonObject);
+	TSharedRef< TJsonReader<> > Reader = TJsonReaderFactory<>::Create(ResponseBody);
+	if (FJsonSerializer::Deserialize(Reader, JsonObject))
+	{
+		HumanResponse.Message = JsonObject->GetStringField(TEXT("Message"));
+		HumanResponse.Emotion = JsonObject->GetStringField(TEXT("Emotion"));
+	}*/
+
+	OnHumanResponseComplete();
 }
 
 TUniquePtr<FHttpServerResponse> AAssistantMetaHumanGameModeBase::Response(const FHttpServerRequest& Request)
