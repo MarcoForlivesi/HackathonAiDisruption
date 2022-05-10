@@ -4,6 +4,12 @@ from flask import jsonify
 import openai
 import numpy as np
 import json
+import sys
+
+if len(sys.argv) < 2:
+    print("Api key missing")
+
+api_key = sys.argv[1]
 
 app = Flask(__name__)
 sentiments_list = {'angry': 0, 'annoyed': 0, 'frustrated': 0, 'sad': 0, 'bored': 0, 'neutral': 0, 'friendly': 0, 'happy': 0, 'excited': 0, 'joyful': 0}
@@ -46,7 +52,7 @@ def translate_sentiment(sentiment):
 
 def return_sentimental_answer(input_sentence, sentiments_list, sentiments_weights):
     '''Function that returns the '''
-    openai.api_key = "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"
+    openai.api_key = api_key
 
     sentiment = openai.Completion.create(engine="text-davinci-002",
                                         prompt="Pick from these sentiments [angry, annoyed, frustrated, sad, bored, neutral, friendly, happy, excited, joyful]: " + input_sentence,
