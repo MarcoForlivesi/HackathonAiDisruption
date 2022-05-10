@@ -8,6 +8,7 @@ import sys
 
 if len(sys.argv) < 2:
     print("Api key missing")
+    exit();
 
 api_key = sys.argv[1]
 
